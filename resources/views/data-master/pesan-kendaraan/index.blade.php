@@ -4,10 +4,12 @@
 <div class="card">
     <div class="card-header">
         <h3 class="card-title" style="margin-top:5px;"><i class="fas fa-list-ul"></i> Kendaraan yang sedang digunakan</h3>
-        <div class="card-tools">
-            <a href="/pesan-kendaraan/create" class="btn btn-sm btn-primary float-right">
-            <i class="fas fa-plus"></i> Tambah Kendaraan</a>
-        </div>
+        @if(Auth::user()->role_id == 1)
+            <div class="card-tools">
+                <a href="/pesan-kendaraan/create" class="btn btn-sm btn-primary float-right">
+                <i class="fas fa-plus"></i> Tambah Kendaraan</a>
+            </div>
+        @endif
     </div>
     <!-- /.card-header -->
     <div class="card-body">
@@ -30,20 +32,41 @@
 
             @if ($kendaraan_digunakan->count() > 0)
             <div class="card">
-                <table class="table table-striped table-hover table-bordered">
+                <table class="table table-bordered table-hover table-striped">
                     <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Plat No</th>
-                            <th scope="col">Status</th>
-                        </tr>
+                    <tr>
+                        <th class="text-center">#</th>
+                        <th class="text-center">Plat Nomor</th>
+                        <th class="text-center">Driver</th>
+                        <th class="text-center">Kode Kegiatan</th>
+                        <th class="text-center">BBM (Liter)</th>
+                        <th class="text-center">Tujuan</th>
+                        <th class="text-center">Tanggal Digunakan</th>
+                        <th class="text-center">Tanggal Selesai</th>
+                        <th class="text-center">Penanggungjawab</th>
+                        <th class="text-center">Action</th>
+                    </tr>
                     </thead>
                     <tbody>
                         @foreach ($kendaraan_digunakan as $data)
                         <tr>
-                            <th scope="row">{{ $loop->iteration }}</th>
+                            <th class="text-center" scope="row">{{ $loop->iteration }}</th>
                             <td>{{ $data->kendaraan->plat_no }}</td>
-                            <td><span class="badge badge-primary">{{ $data->kendaraan->status_kendaraan->status_kendaraan }}</span></td>
+                            <td>{{ $data->driver->nama }}</td>
+                            <td>{{ $data->kode_kegiatan }}</td>
+                            <td>{{ $data->bbm_liter }}</td>
+                            <td>{{ $data->tujuan }}</td>
+                            <td>{{ $data->tanggal_digunakan }}</td>
+                            <td>{{ $data->tanggal_selesai }}</td>
+                            <td>{{ $data->user->name }}</td>
+                            <td class="text-center">
+                                <h5>
+                                    <form action="/pesan-kendaraan/{{ $data->id }}/selesai-digunakan" class="d-inline" method="post">
+                                        @csrf
+                                        <button class="btn badge bg-primary" type="submit" onclick="return confirm('Apakah Pesanan Disetujui?')">Selesai</button>
+                                    </form>
+                                </h5>
+                            </td>
                         </tr>
                         @endforeach
                     </tbody>
@@ -54,9 +77,11 @@
                 <img src="/img/truk.png" class="img-fluid" alt="Oops" width="30%">
             </div>
             <h3 class="text-center"><strong>Tidak ada Kendaraan yang sedang digunakan</strong></h3>
-            <div class="text-center">
-                <a class="btn btn-primary btn-sm" href="/pesan-kendaraan/create">+ Pesan Kendaraan</a>
-            </div>
+                @if(Auth::user()->role_id == 1)
+                    <div class="text-center">
+                        <a class="btn btn-primary btn-sm" href="/pesan-kendaraan/create">+ Pesan Kendaraan</a>
+                    </div>
+                @endif
             @endif
 
         <div class="mb-3"></div>

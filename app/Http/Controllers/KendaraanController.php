@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Kendaraan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class KendaraanController extends Controller
 {
@@ -35,6 +36,9 @@ class KendaraanController extends Controller
      */
     public function create()
     {
+        if(Auth::user()->role_id == 2){
+            return back()->with('error', 'Maaf Pembuatan/Perubahan data hanya diperbolehkan untuk admin');
+        }
         return view('data-master.kendaraan.create');
     }
 
@@ -74,6 +78,10 @@ class KendaraanController extends Controller
      */
     public function edit(Kendaraan $kendaraan)
     {
+        if(Auth::user()->role_id == 2){
+            return back()->with('error', 'Maaf Pembuatan/Perubahan data hanya diperbolehkan untuk admin');
+        }
+
         return view('data-master.kendaraan.edit', [
             'kendaraan' => $kendaraan
         ]);
@@ -135,6 +143,7 @@ class KendaraanController extends Controller
     public function kendaraanDiservice(){
         $kendaraans = Kendaraan::where('status_kendaraan_id', 3)->latest()->paginate(7)->withQueryString();
         // $kendaraans = Kendaraan::where(['status_kendaraan_id' => 1, ])->latest()->paginate(7)->withQueryString();
+        // dd($kendaraans);
         return view('data-master.kondisi-kendaraan.diservice', [
             'kendaraans' => $kendaraans
         ]);
@@ -152,13 +161,13 @@ class KendaraanController extends Controller
         ];
 
         \App\Models\RiwayatService::create($array);
-        return redirect('/kendaraan/diservice')->with('success', 'Kendaraan Dikirim ke Bagian Service');
+        return redirect('/kendaraan')->with('success', 'Kendaraan Dikirim ke Bagian Service');
     }
 
     public function kendaraanSelesaiService(Kendaraan $kendaraan){
         $kendaraan->where('id', $kendaraan->id)->update(['status_kendaraan_id' => 1]);
 
         \App\Models\RiwayatService::where('kendaraan_id',$kendaraan->id)->update(['tanggal_keluar' => Carbon::now()]);
-        return redirect('/kendaraan/diservice')->with('success', 'Kendaraan Selesai Service');
+        return redirect('/kendaraan')->with('success', 'Kendaraan Selesai Service');
     }
 }

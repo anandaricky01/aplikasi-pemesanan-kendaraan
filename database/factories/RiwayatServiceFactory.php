@@ -17,7 +17,9 @@ class RiwayatServiceFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'kendaraan_id' => $this->faker->numberBetween(1,15),
+            'tanggal_service' => $this->faker->dateTimeBetween('-7 month', 'now'),
+            'tanggal_keluar' => $this->faker->dateTimeBetween('now')
         ];
     }
 }

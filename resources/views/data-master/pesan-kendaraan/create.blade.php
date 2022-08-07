@@ -76,6 +76,23 @@
             </div>
         </div>
 
+        <div class="form-group row">
+            <label for="Kategori Blog" class="col-sm-3 col-form-label">Disetujui Oleh</label>
+            <div class="col-sm-7">
+                <select class="form-control @error('driver_id') is-invalid @enderror" name="user_id">
+                    @foreach ($users as $user)
+                        <option value="{{ $user->id }}">{{ $user->name }}</option>
+                    @endforeach
+                </select>
+                @error('driver_id')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
+
+            </div>
+        </div>
+
         {{-- Kode Kegiatan --}}
         <div class="form-group row">
             <label for="Kategori Blog" class="col-sm-3 col-form-label">Kode Kegiatan</label>

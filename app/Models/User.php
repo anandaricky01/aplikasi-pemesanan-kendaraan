@@ -46,4 +46,16 @@ class User extends Authenticatable
     function role(){
         return $this->belongsTo(Role::class);
     }
+
+    function riwayat_kendaraan(){
+        return $this->hasMany(RiwayatKendaraan::class);
+    }
+
+    function pending_kendaraan(){
+        return $this->hasMany(PendingKendaraan::class);
+    }
+
+    function kendaraan_digunakan(){
+        return $this->hasMany(KendaraanDigunakan::class);
+    }
 }

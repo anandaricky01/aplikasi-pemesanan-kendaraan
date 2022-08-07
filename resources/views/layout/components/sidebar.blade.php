@@ -95,14 +95,6 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="blog.php" class="nav-link">
-              <i class="nav-icon fab fa-blogger"></i>
-              <p>
-                Blog
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
             <a href="user.php" class="nav-link">
               <i class="nav-icon fas fa-user-cog"></i>
               <p>
@@ -119,13 +111,16 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="signout.php" class="nav-link">
-              <i class="nav-icon fas fa-sign-out-alt"></i>
-              <p>
-                Sign Out
-              </p>
-            </a>
-          </li>
+                <form action="/logout" method="post">
+                    @csrf
+                    <div class="nav-link">
+                        <i class="nav-icon fas fa-sign-out-alt"></i>
+                        <button type="submit" class="bg-transparent border border-0 text-white">
+                            Sign Out
+                        </button>
+                    </div>
+                </form>
+            </li>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

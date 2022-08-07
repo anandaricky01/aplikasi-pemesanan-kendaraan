@@ -18,7 +18,7 @@ class KendaraanFactory extends Factory
     {
         return [
             'plat_no' => $this->faker->numerify('N #### ') . strtoupper(Str::random(3)),
-            'status_kendaraan_id' => $this->faker->numberBetween(1,3)
+            'status_kendaraan_id' => 1
         ];
     }
 }

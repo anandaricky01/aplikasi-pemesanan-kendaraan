@@ -13,6 +13,12 @@
             </div>
         @endif
 
+        @if (session()->has('error'))
+            <div class="col-sm-12">
+                <div class="alert alert-success" role="alert">{!! session('error') !!}</div>
+            </div>
+        @endif
+
         {{-- search --}}
         <div class="container-fluid">
             <form action="/pending" method="get">
@@ -37,6 +43,7 @@
                     <th class="text-center">Tujuan</th>
                     <th class="text-center">Tanggal Digunakan</th>
                     <th class="text-center">Tanggal Selesai</th>
+                    <th class="text-center">Penanggungjawab</th>
                     <th class="text-center">Action</th>
                 </tr>
                 </thead>
@@ -51,15 +58,43 @@
                         <td>{{ $pending->tujuan }}</td>
                         <td>{{ $pending->tanggal_digunakan }}</td>
                         <td>{{ $pending->tanggal_selesai }}</td>
+                        <td>{{ $pending->user->name }}</td>
                         <td class="text-center">
                             <h5>
                                 @if(Auth::user()->role_id == '2')
-                                    <form action="pending/{{ $pending->id }}/cuti" class="d-inline" method="post">
-                                        @csrf
-                                        <button class="btn badge bg-warning" type="submit" onclick="return confirm('Apakah pending Mengambil Cuti?')">Cuti</button>
-                                    </form>
+                                    @if ($pending->status == 'pending')
+                                        @if(Auth::user()->id == $pending->user_id)
+                                            <form action="/kendaraan/pending/{{ $pending->id }}/setujui" class="d-inline" method="post">
+                                                @csrf
+                                                <button class="btn badge bg-primary" type="submit" onclick="return confirm('Apakah Pesanan Disetujui?')">Setujui</button>
+                                            </form>
+                                            <form action="/kendaraan/pending/{{ $pending->id }}/tolak" class="d-inline" method="post">
+                                                @csrf
+                                                <button class="btn badge bg-danger" type="submit" onclick="return confirm('Apakah Pesanan Ditolak?')">Tolak</button>
+                                            </form>
+                                        @else
+                                            <form action="/kendaraan/pending/{{ $pending->id }}/setujui" class="d-inline" method="post">
+                                                @csrf
+                                                <button class="btn badge bg-primary" type="submit" onclick="return confirm('Apakah Pesanan Disetujui?')" disabled>Setujui</button>
+                                            </form>
+                                            <form action="/kendaraan/pending/{{ $pending->id }}/tolak" class="d-inline" method="post">
+                                                @csrf
+                                                <button class="btn badge bg-danger" type="submit" onclick="return confirm('Apakah Pesanan Ditolak?')" disabled>Tolak</button>
+                                            </form>
+                                        @endif
+                                    @elseif($pending->status == 'disetujui')
+                                        <button class="btn badge bg-primary" type="button" disabled>Disetujui</button>
+                                    @else
+                                        <button class="btn badge bg-danger" type="button" disabled>Ditolak</button>
+                                    @endif
                                 @else
-                                    <button class="btn badge bg-warning" type="button" disabled>Pending</button>
+                                    @if ($pending->status == 'pending')
+                                        <button class="btn badge bg-warning" type="button" disabled>Pending</button>
+                                    @elseif($pending->status == 'disetujui')
+                                        <button class="btn badge bg-primary" type="button" disabled>Disetujui</button>
+                                    @else
+                                        <button class="btn badge bg-danger" type="button" disabled>Ditolak</button>
+                                    @endif
                                 @endif
                             </h5>
                         </td>

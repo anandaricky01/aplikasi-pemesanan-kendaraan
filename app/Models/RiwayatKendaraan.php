@@ -19,6 +19,10 @@ class RiwayatKendaraan extends Model
         return $this->belongsTo(Kendaraan::class);
     }
 
+    function user(){
+        return $this->belongsTo(User::class);
+    }
+
     // function pending_kendaraan(){
     //     return $this->belongsTo(PendingKendaraan::class);
     // }

@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\KendaraanDigunakan;
 use App\Models\Kendaraan;
 use App\Models\Driver;
+use App\Models\User;
 use App\Models\PendingKendaraan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class KendaraanDigunakanController extends Controller
 {
@@ -34,11 +36,17 @@ class KendaraanDigunakanController extends Controller
      */
     public function create()
     {
+        if(Auth::user()->role_id == 2){
+            return back()->with('error', 'Maaf Pembuatan/Perubahan data hanya diperbolehkan untuk admin');
+        }
+
         $kendaraan = Kendaraan::select(['id', 'plat_no'])->where('status_kendaraan_id',1)->get();
         $driver = Driver::select(['id', 'nama'])->where('status', 'tersedia')->get();
+        $user = User::select(['id', 'name'])->where('role_id', 2)->get();
         return view('data-master.pesan-kendaraan.create', [
             'kendaraans' => $kendaraan,
-            'drivers' => $driver
+            'drivers' => $driver,
+            'users' => $user
         ]);
     }
 
@@ -53,7 +61,8 @@ class KendaraanDigunakanController extends Controller
         $validated = $request->validate([
             'kendaraan_id' => 'required',
             'driver_id' => 'required',
-            'kode_kegiatan' => 'required',
+            'user_id' => 'required',
+            'kode_kegiatan' => 'required|unique:pending_kendaraans',
             'bbm_liter' => 'required|numeric',
             'tanggal_digunakan' => 'required|date|after:today',
             'tanggal_selesai' => 'required|date|after:tanggal_digunakan',
@@ -91,7 +100,9 @@ class KendaraanDigunakanController extends Controller
      */
     public function edit(KendaraanDigunakan $kendaraanDigunakan)
     {
-        //
+        if(Auth::user()->role_id == 2){
+            return back()->with('error', 'Maaf Pembuatan/Perubahan data hanya diperbolehkan untuk admin');
+        }
     }
 
     /**
@@ -115,5 +126,14 @@ class KendaraanDigunakanController extends Controller
     public function destroy(KendaraanDigunakan $kendaraanDigunakan)
     {
         //
+    }
+
+    public function selesaiDigunakan(KendaraanDigunakan $kendaraanDigunakan){
+        // dd($kendaraanDigunakan);
+        Kendaraan::where('id', $kendaraanDigunakan->kendaraan_id)->update(['status_kendaraan_id' => 1]);
+        Driver::where('id', $kendaraanDigunakan->kendaraan_id)->update(['status' => 'tersedia']);
+
+        $kendaraanDigunakan->where('id', $kendaraanDigunakan->id)->delete();
+        return redirect('/pesan-kendaraan')->with('success', 'Ekspedisi Selesai!');
     }
 }

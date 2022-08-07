@@ -10,10 +10,10 @@
         {{-- <div class="col-sm-12">
             <div class="alert alert-success" role="alert">Data Berhasil Diubah</div>
         </div> --}}
-        
+
         {{-- <h2 class="text-center mt-3 mb-4">Riwayat Penggunaan Kendaraan</h2> --}}
         @if ($riwayat->count() > 0)
-        <div class="card">    
+        <div class="card">
             <table class="table table-bordered table-hover table-striped">
                 <thead>
                 <tr>
@@ -21,9 +21,10 @@
                     <th scope="col">Kode Kegiatan</th>
                     <th scope="col">Kendaraan (Plat Nomor)</th>
                     <th scope="col">Driver</th>
+                    <th scope="col">Penggunaan BBM (liter)</th>
                     <th scope="col">Tanggal Digunakan</th>
                     <th scope="col">Tanggal Selesai</th>
-                    <th scope="col">Penggunaan BBM (liter)</th>
+                    <th scope="col">Penanggungjawab</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -33,9 +34,10 @@
                         <td>{{ $r->kode_kegiatan }}</td>
                         <td>{{ $r->kendaraan->plat_no }}</td>
                         <td>{{ $r->driver->nama }}</td>
+                        <td>{{ $r->bbm_liter }}</td>
                         <td>{{ $r->tanggal_digunakan }}</td>
                         <td>{{ $r->tanggal_selesai }}</td>
-                        <td>{{ $r->bbm_liter }}</td>
+                        <td>{{ $r->user->name }}</td>
                     </tr>
                     @endforeach
                     <tr>

@@ -43,6 +43,9 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/digunakan', [KendaraanController::class, 'kendaraanDigunakan']);
         Route::get('/diservice', [KendaraanController::class, 'kendaraanDiservice']);
         Route::get('/pending', [PendingKendaraanController::class, 'index']);
+        Route::post('/pending/{pending:id}/setujui', [PendingKendaraanController::class, 'setujui']);
+        Route::post('/pending/{pending:id}/tolak', [PendingKendaraanController::class, 'tolak']);
+        Route::post('/pending/{pending:id}/hapus', [PendingKendaraanController::class, 'hapus']);
         Route::post('/{kendaraan:id}/service', [KendaraanController::class, 'kendaraanKeService']);
         Route::post('/{kendaraan:id}/service-selesai', [KendaraanController::class, 'kendaraanSelesaiService']);
     });
@@ -60,6 +63,9 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('driver', DriverController::class);
 
     // resource untuk pemesanan kendaraan
+    Route::group(['prefix' => 'pesan-kendaraan'], function(){
+        Route::post('/{kendaraanDigunakan:id}/selesai-digunakan', [KendaraanDigunakanController::class, 'selesaiDigunakan']);
+    });
     Route::resource('pesan-kendaraan', KendaraanDigunakanController::class);
 
     // controller untuk mengatasi riwayat riwayat

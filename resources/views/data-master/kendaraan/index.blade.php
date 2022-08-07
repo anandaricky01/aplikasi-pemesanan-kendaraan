@@ -4,10 +4,12 @@
 <div class="card">
     <div class="card-header">
         <h3 class="card-title" style="margin-top:5px;"><i class="fas fa-list-ul"></i> List Kendaraan</h3>
+        @if(Auth::user()->role_id == 1)
         <div class="card-tools">
             <a href="/kendaraan/create" class="btn btn-sm btn-info float-right">
             <i class="fas fa-plus"></i>Tambah Kendaraan</a>
         </div>
+        @endif
     </div>
     <!-- /.card-header -->
     <div class="card-body">
@@ -16,7 +18,7 @@
                 <div class="alert alert-success" role="alert">{{ session('success') }}</div>
             </div>
         @endif
-        
+
         {{-- search --}}
         <div class="container-fluid">
             <form action="/kendaraan" method="get">
@@ -29,14 +31,16 @@
         {{-- /search --}}
 
         @if ($kendaraans->count() > 0)
-        <div class="card">    
+        <div class="card">
             <table class="table table-bordered table-hover table-striped">
                 <thead>
                 <tr>
                     <th class="text-center">#</th>
                     <th class="text-center">Kendaraan (Plat Nomor)</th>
                     <th class="text-center">Status</th>
+                    @if(Auth::user()->role_id == 1)
                     <th class="text-center">Action</th>
+                    @endif
                 </tr>
                 </thead>
                 <tbody>
@@ -44,7 +48,7 @@
                     <tr>
                         <th class="text-center" scope="row">{{ $loop->iteration }}</th>
                         <td>{{ $kendaraan->plat_no }}</td>
-                        <td class="text-center"> 
+                        <td class="text-center">
                         @if ($kendaraan->status_kendaraan_id == 1)
                             <button type="button" class="btn btn-sm btn-primary" disabled>{{ $kendaraan->status_kendaraan->status_kendaraan }}</button>
                         @elseif($kendaraan->status_kendaraan_id == 2)
@@ -53,20 +57,22 @@
                             <button type="button" class="btn btn-sm btn-warning" disabled>{{ $kendaraan->status_kendaraan->status_kendaraan }}</button>
                         @endif
                         </td>
-                        <td class="text-center">
-                            <h5>
-                                <a href="/kendaraan/{{ $kendaraan->id }}/edit"><span class="badge bg-primary">Edit</span></a>
-                                <form action="/kendaraan/{{ $kendaraan->id }}/service" class="d-inline" method="post">
-                                    @csrf
-                                    <button class="btn badge bg-warning" type="submit" onclick="return confirm('Kirim kendaraan ke Service?')" {{ $kendaraan->status_kendaraan_id == 3 || $kendaraan->status_kendaraan_id == 2 ? 'disabled' : ''}}>Service</button>
-                                </form>
-                                <form action="/kendaraan/{{ $kendaraan->id }}" class="d-inline" method="post">
-                                    @csrf
-                                    @method('delete')
-                                    <button class="btn badge bg-danger" type="submit" onclick="return confirm('Kamu yakin ingin menghapus {{ $kendaraan->plat_no }}?')">Delete</button>
-                                </form>
-                            </h5>
-                        </td>
+                        @if(Auth::user()->role_id == 1)
+                            <td class="text-center">
+                                <h5>
+                                    <a href="/kendaraan/{{ $kendaraan->id }}/edit"><span class="badge bg-primary">Edit</span></a>
+                                    <form action="/kendaraan/{{ $kendaraan->id }}/service" class="d-inline" method="post">
+                                        @csrf
+                                        <button class="btn badge bg-warning" type="submit" onclick="return confirm('Kirim kendaraan ke Service?')" {{ $kendaraan->status_kendaraan_id == 3 || $kendaraan->status_kendaraan_id == 2 ? 'disabled' : ''}}>Service</button>
+                                    </form>
+                                    <form action="/kendaraan/{{ $kendaraan->id }}" class="d-inline" method="post">
+                                        @csrf
+                                        @method('delete')
+                                        <button class="btn badge bg-danger" type="submit" onclick="return confirm('Kamu yakin ingin menghapus {{ $kendaraan->plat_no }}?')">Delete</button>
+                                    </form>
+                                </h5>
+                            </td>
+                        @endif
                     </tr>
                     @endforeach
                 </tbody>

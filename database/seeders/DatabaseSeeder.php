@@ -10,6 +10,7 @@ use App\Models\User;
 use App\Models\Role;
 use App\Models\PendingKendaraan;
 use App\Models\RiwayatKendaraan;
+use App\Models\RiwayatService;
 use App\Models\StatusKendaraan;
 
 class DatabaseSeeder extends Seeder
@@ -28,10 +29,11 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
-        // Driver::factory(10)->create();
-        // Kendaraan::factory(15)->create();
-        // RiwayatKendaraan::factory(20)->create();
-        
+        Driver::factory(10)->create();
+        Kendaraan::factory(15)->create();
+        RiwayatKendaraan::factory(100)->create();
+        RiwayatService::factory(100)->create();
+
         StatusKendaraan::create([
             'status_kendaraan' => 'Tersedia'
         ]);
@@ -62,6 +64,20 @@ class DatabaseSeeder extends Seeder
         User::create([
             'name' => 'Kasi Perhub',
             'email' => 'perhub@gmail.com',
+            'role_id' => 2,
+            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi'
+        ]);
+
+        User::create([
+            'name' => 'Kasi Ku',
+            'email' => 'ku@gmail.com',
+            'role_id' => 2,
+            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi'
+        ]);
+
+        User::create([
+            'name' => 'Kasi Jas',
+            'email' => 'jas@gmail.com',
             'role_id' => 2,
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi'
         ]);

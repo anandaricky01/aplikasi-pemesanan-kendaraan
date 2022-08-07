@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Driver;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DriverController extends Controller
 {
@@ -32,6 +33,9 @@ class DriverController extends Controller
      */
     public function create()
     {
+        if(Auth::user()->role_id == 2){
+            return back()->with('error', 'Maaf Pembuatan/Perubahan data hanya diperbolehkan untuk admin');
+        }
         return view('data-master.driver.create');
     }
 
@@ -70,6 +74,10 @@ class DriverController extends Controller
      */
     public function edit(Driver $driver)
     {
+        if(Auth::user()->role_id == 2){
+            return back()->with('error', 'Maaf Pembuatan/Perubahan data hanya diperbolehkan untuk admin');
+        }
+
         return view('data-master.driver.edit', [
             'driver' => $driver
         ]);

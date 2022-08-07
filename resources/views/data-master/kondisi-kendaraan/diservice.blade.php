@@ -32,7 +32,9 @@
                     <th class="text-center">#</th>
                     <th class="text-center">Kendaraan (Plat Nomor)</th>
                     <th class="text-center">Status</th>
+                    @if(Auth::user()->role_id == 1)
                     <th class="text-center">Action</th>
+                    @endif
                 </tr>
                 </thead>
                 <tbody>
@@ -41,20 +43,22 @@
                         <th class="text-center" scope="row">{{ $loop->iteration }}</th>
                         <td>{{ $kendaraan->plat_no }}</td>
                         <td class="text-center">
-                        @if ($kendaraan->status_kendaraan_id == 1)
+                        {{-- @if ($kendaraan->status_kendaraan_id == 1)
                             <button type="button" class="btn btn-sm btn-primary" disabled>{{ $kendaraan->status_kendaraan->status_kendaraan }}</button>
-                        @elseif($kendaraan->status_kendaraan_id == 2)
-                            <button type="button" class="btn btn-sm btn-danger" disabled>{{ $kendaraan->status_kendaraan->status_kendaraan }}</button>
-                        @else
+                        @elseif($kendaraan->status_kendaraan_id == 2) --}}
                             <button type="button" class="btn btn-sm btn-warning" disabled>{{ $kendaraan->status_kendaraan->status_kendaraan }}</button>
-                        @endif
+                        {{-- @else
+                            <button type="button" class="btn btn-sm btn-warning" disabled>{{ $kendaraan->status_kendaraan->status_kendaraan }}</button>
+                        @endif --}}
                         </td>
+                        @if(Auth::user()->role_id == 1)
                         <td class="text-center">
                             <form action="/kendaraan/{{ $kendaraan->id }}/service-selesai" class="d-inline" method="post">
                                 @csrf
                                 <button class="btn badge bg-primary" type="submit" onclick="return confirm('Kirim kendaraan ke Service?')">Selesai</button>
                             </form>
                         </td>
+                        @endif
                     </tr>
                     @endforeach
                 </tbody>

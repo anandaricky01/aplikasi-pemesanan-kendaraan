@@ -4,10 +4,12 @@
 <div class="card">
     <div class="card-header">
         <h3 class="card-title" style="margin-top:5px;"><i class="fas fa-list-ul"></i> List Driver</h3>
+        @if(Auth::user()->role_id == 1)
         <div class="card-tools">
             <a href="/driver/create" class="btn btn-sm btn-info float-right">
             <i class="fas fa-plus"></i>Tambah Driver</a>
         </div>
+        @endif
     </div>
     <!-- /.card-header -->
     <div class="card-body">
@@ -36,7 +38,9 @@
                     <th class="text-center">#</th>
                     <th class="text-center">Nama</th>
                     <th class="text-center">Status</th>
+                    @if(Auth::user()->role_id == 1)
                     <th class="text-center">Action</th>
+                    @endif
                 </tr>
                 </thead>
                 <tbody>
@@ -53,6 +57,7 @@
                             <button type="button" class="btn btn-sm btn-warning" disabled>{{ $driver->status }}</button>
                         @endif
                         </td>
+                        @if(Auth::user()->role_id == 1)
                         <td class="text-center">
                             <h5>
                                 <a href="driver/{{ $driver->id }}/edit"><span class="badge bg-primary">Edit</span></a>
@@ -80,6 +85,7 @@
                                 </form>
                             </h5>
                         </td>
+                        @endif
                     </tr>
                     @endforeach
                 </tbody>

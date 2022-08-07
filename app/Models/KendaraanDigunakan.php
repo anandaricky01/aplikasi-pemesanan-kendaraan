@@ -18,4 +18,8 @@ class KendaraanDigunakan extends Model
     function driver(){
         return $this->belongsTo(Driver::class);
     }
+
+    function user(){
+        return $this->belongsTo(User::class);
+    }
 }

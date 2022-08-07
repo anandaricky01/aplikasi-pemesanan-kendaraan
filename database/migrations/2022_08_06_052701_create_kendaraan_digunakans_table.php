@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('kendaraan_id')->on('kendaraans')->onDelete('cascade');
             $table->foreignId('driver_id')->on('drivers')->onDelete('cascade');
+            $table->foreignId('user_id')->on('users')->onDelete('cascade');
             $table->string('kode_kegiatan');
             $table->integer('bbm_liter');
             $table->date('tanggal_digunakan');
