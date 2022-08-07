@@ -1,0 +1,66 @@
+#product-item img{
+  width: 100%;
+  height: 300px;
+}
+#katalog-wrapper img{
+  width: 100%;
+  height: 300px;
+}
+#notes-item{
+    padding-top: 50px;
+}
+
+#blog-header{
+    background-image: url("img/blog-header.jpg");
+    background-repeat: no-repeat;
+    height: 200px;
+    padding-top: 80px;
+}
+#katalog-wrapper .katalog-detail table tr td img{
+  border-radius: 5px;
+  vertical-align: middle;
+}
+footer {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+  
+footer p {
+    margin-bottom: .25rem;
+  }
+/* Featurettes
+------------------------- */
+
+.featurette-divider {
+    margin: 5rem 0; /* Space out the Bootstrap <hr> more */
+  }
+  
+  /* Thin out the marketing headings */
+  .featurette-heading {
+    font-weight: 300;
+    line-height: 1;
+    letter-spacing: -.05rem;
+  }
+  
+
+/* RESPONSIVE CSS
+-------------------------------------------------- */
+
+@media (min-width: 40em) {
+    /* Bump up size of carousel content */
+    .carousel-caption p {
+      margin-bottom: 1.25rem;
+      font-size: 1.25rem;
+      line-height: 1.4;
+    }
+  
+    .featurette-heading {
+      font-size: 50px;
+    }
+  }
+  
+  @media (min-width: 62em) {
+    .featurette-heading {
+      margin-top: 7rem;
+    }
+  }

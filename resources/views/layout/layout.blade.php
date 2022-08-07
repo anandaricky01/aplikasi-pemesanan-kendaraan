@@ -1,0 +1,6 @@
+@include('layout.components.head')
+@include('layout.components.header')
+@include('layout.components.sidebar')
+@include('layout.components.body')
+    @yield('container')
+@include('layout.components.script')
