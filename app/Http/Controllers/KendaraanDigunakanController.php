@@ -18,14 +18,17 @@ class KendaraanDigunakanController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         // $jumlah = KendaraanDigunakan::select('kendaraan_id', DB::raw('count(kendaraan_id) quantity'))->groupBy('kendaraan_id')->get();
         // $jumlah = Kendaraan::select('plat_no', DB::raw('count(plat_no) quantity'))->groupBy('plat_no')->get();
         // dd($jumlah);
-
+        $term = '';
+        if(isset($request->kode_kegiatan)){
+            $term .= $request->kode_kegiatan;
+        }
         return view('data-master.pesan-kendaraan.index', [
-            'kendaraan_digunakan' => KendaraanDigunakan::latest()->paginate(7)->withQueryString()
+            'kendaraan_digunakan' => KendaraanDigunakan::where('kode_kegiatan','LIKE','%' . $term . '%')->latest()->paginate(7)->withQueryString()
         ]);
     }
 

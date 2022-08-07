@@ -15,7 +15,7 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <li class="nav-item">
             <a href="/" class="nav-link">
-              <i class="nav-icon fas fa-user"></i>
+              <i class="nav-icon fas fa-book"></i>
               <p>
                 Rangkuman Bulanan
               </p>
@@ -83,30 +83,6 @@
               <i class="nav-icon fas fa-file-alt"></i>
               <p>
                 Riwayat Service
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="buku.php" class="nav-link">
-              <i class="nav-icon fas fa-book"></i>
-              <p>
-                Riwayat BBM
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="user.php" class="nav-link">
-              <i class="nav-icon fas fa-user-cog"></i>
-              <p>
-                Pengaturan User
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="ubahpassword.php" class="nav-link">
-              <i class="nav-icon fas fa-user-lock"></i>
-              <p>
-                Ubah Password
               </p>
             </a>
           </li>

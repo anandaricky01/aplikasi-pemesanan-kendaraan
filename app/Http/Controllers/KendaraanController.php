@@ -122,8 +122,12 @@ class KendaraanController extends Controller
     }
 
     // list kendaraan tersedia
-    public function kendaraanTersedia(){
-        $kendaraans = Kendaraan::where('status_kendaraan_id', 1)->latest()->paginate(7)->withQueryString();
+    public function kendaraanTersedia(Request $request){
+        $term = '';
+        if(isset($request->plat_no)){
+            $term .= $request->plat_no;
+        }
+        $kendaraans = Kendaraan::where([['plat_no', 'LIKE', '%' . $term . '%'],['status_kendaraan_id',1]])->latest()->paginate(7)->withQueryString();
         // $kendaraans = Kendaraan::where(['status_kendaraan_id' => 1, ])->latest()->paginate(7)->withQueryString();
         return view('data-master.kondisi-kendaraan.tersedia', [
             'kendaraans' => $kendaraans
@@ -131,17 +135,21 @@ class KendaraanController extends Controller
     }
 
     // list kendaraan yang sedang digunakan
-    public function kendaraanDigunakan(){
-        $kendaraans = Kendaraan::where('status_kendaraan_id', 2)->latest()->paginate(7)->withQueryString();
-        // $kendaraans = Kendaraan::where(['status_kendaraan_id' => 1, ])->latest()->paginate(7)->withQueryString();
-        return view('data-master.kondisi-kendaraan.digunakan', [
-            'kendaraans' => $kendaraans
-        ]);
-    }
+    // public function kendaraanDigunakan(){
+    //     $kendaraans = Kendaraan::where('status_kendaraan_id', 2)->latest()->paginate(7)->withQueryString();
+    //     // $kendaraans = Kendaraan::where(['status_kendaraan_id' => 1, ])->latest()->paginate(7)->withQueryString();
+    //     return view('data-master.kondisi-kendaraan.digunakan', [
+    //         'kendaraans' => $kendaraans
+    //     ]);
+    // }
 
     // list kendaraan yang berada di tukang service
-    public function kendaraanDiservice(){
-        $kendaraans = Kendaraan::where('status_kendaraan_id', 3)->latest()->paginate(7)->withQueryString();
+    public function kendaraanDiservice(Request $request){
+        $term = '';
+        if(isset($request->plat_no)){
+            $term .= $request->plat_no;
+        }
+        $kendaraans = Kendaraan::where([['plat_no', 'LIKE', '%' . $term . '%'],['status_kendaraan_id',3]])->latest()->paginate(7)->withQueryString();
         // $kendaraans = Kendaraan::where(['status_kendaraan_id' => 1, ])->latest()->paginate(7)->withQueryString();
         // dd($kendaraans);
         return view('data-master.kondisi-kendaraan.diservice', [

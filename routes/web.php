@@ -30,7 +30,6 @@ Route::group(['auth' => 'guest','prefix' => 'login'] ,function () {
 
 // route protecter
 Route::middleware(['auth'])->group(function () {
-
     Route::get('/', [RootController::class, 'index']);
 
     Route::get('/home', function (){
@@ -70,6 +69,7 @@ Route::middleware(['auth'])->group(function () {
 
     // controller untuk mengatasi riwayat riwayat
     Route::get('/riwayat-kendaraan', [RiwayatKendaraanController::class, 'index']);
+    Route::get('/riwayat-kendaraan/export', [RiwayatKendaraanController::class, 'export']);
     Route::get('/riwayat-service', [RiwayatServiceController::class, 'index']);
 
     // logout

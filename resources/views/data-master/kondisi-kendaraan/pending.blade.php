@@ -21,9 +21,9 @@
 
         {{-- search --}}
         <div class="container-fluid">
-            <form action="/pending" method="get">
+            <form action="/kendaraan/pending" method="get">
                 <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="contoh : Ayu Lestari" aria-label="Recipient's username" aria-describedby="button-addon2" name="nama" value="{{ Request::is('nama') != null ? Request::is('nama') : '' }}">
+                    <input type="text" class="form-control" placeholder="Gunakan Kode Kegiatan" aria-label="Recipient's username" aria-describedby="button-addon2" name="kode_kegiatan" value="{{ Request::is('kode_kegiatan') != null ? Request::is('kode_kegiatan') : '' }}">
                     <button class="btn btn-outline-secondary" type="submit" id="button-addon2">cari</button>
                 </div>
             </form>

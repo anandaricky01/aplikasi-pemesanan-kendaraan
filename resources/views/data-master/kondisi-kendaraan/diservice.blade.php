@@ -15,7 +15,7 @@
 
         {{-- search --}}
         <div class="container-fluid">
-            <form action="/kendaraan" method="get">
+            <form action="/kendaraan/diservice" method="get">
                 <div class="input-group mb-3">
                     <input type="text" class="form-control" placeholder="contoh : N 5570 Q6O" aria-label="Recipient's username" aria-describedby="button-addon2" name="plat_no" value="{{ Request::is('plat_no') != null ? $request->plat_no : '' }}">
                     <button class="btn btn-outline-secondary" type="submit" id="button-addon2">cari</button>

@@ -21,9 +21,9 @@
 
         {{-- search --}}
         <div class="container-fluid">
-            <form action="/kendaraan" method="get">
+            <form action="/pesan-kendaraan" method="get">
                 <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="contoh : N 5570 Q6O" aria-label="Recipient's username" aria-describedby="button-addon2" name="plat_no">
+                    <input type="text" class="form-control" placeholder="Cari menggunakan Kode Kegiatan" aria-label="Recipient's username" aria-describedby="button-addon2" name="kode_kegiatan">
                     <button class="btn btn-outline-secondary" type="submit" id="button-addon2">cari</button>
                 </div>
             </form>
@@ -44,7 +44,9 @@
                         <th class="text-center">Tanggal Digunakan</th>
                         <th class="text-center">Tanggal Selesai</th>
                         <th class="text-center">Penanggungjawab</th>
+                        @if(Auth::user()->role_id == 1)
                         <th class="text-center">Action</th>
+                        @endif
                     </tr>
                     </thead>
                     <tbody>
@@ -59,6 +61,7 @@
                             <td>{{ $data->tanggal_digunakan }}</td>
                             <td>{{ $data->tanggal_selesai }}</td>
                             <td>{{ $data->user->name }}</td>
+                            @if(Auth::user()->role_id == 1)
                             <td class="text-center">
                                 <h5>
                                     <form action="/pesan-kendaraan/{{ $data->id }}/selesai-digunakan" class="d-inline" method="post">
@@ -67,6 +70,7 @@
                                     </form>
                                 </h5>
                             </td>
+                            @endif
                         </tr>
                         @endforeach
                     </tbody>

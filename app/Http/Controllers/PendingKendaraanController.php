@@ -12,9 +12,13 @@ use Illuminate\Support\Facades\Auth;
 
 class PendingKendaraanController extends Controller
 {
-    public function index(){
+    public function index(Request $request){
+        $term = '';
+        if(isset($request->kode_kegiatan)){
+            $term .= $request->kode_kegiatan;
+        }
         return view('data-master.kondisi-kendaraan.pending', [
-            'pendings' => PendingKendaraan::latest()->paginate(7)->withQueryString()
+            'pendings' => PendingKendaraan::where('kode_kegiatan','LIKE','%' . $term . '%')->latest()->paginate(7)->withQueryString()
         ]);
     }
 
