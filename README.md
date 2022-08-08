@@ -1,64 +1,97 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+## Username - Password
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+- administrator => [
+    username/email => admin@gmail.com,
+    password => password
+]
 
-## About Laravel
+- Kepala Seksi Perhubungan (Kasi Perhub) => [
+    username/email => perhub@gmail.com,
+    password => password
+]
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- Kepala Seksi Keuangan (Kasi Ku) => [
+    username/email => ku@gmail.com,
+    password => password
+]
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- Kepala Seksi Jasmani (Kasi Jas) => [
+    username/email => jas@gmail.com,
+    password => password
+]
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Database Version
+- 10.5.16-MariaDB-cll-lve
 
-## Learning Laravel
+## PHP Version
+- 8.0.21
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Framework
+- Laravel 9.x
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Panduan Menggunakan Aplikasi
+1. Login Terlebih dahulu sebagai 'Administrator' atau 'Atasan'/'Kepala Seksi' dengan username dan password yang telah disediakan
 
-## Laravel Sponsors
+2. Seluruh Kegiatan C-R-U-D hanya bisa dilakukan oleh Administrator
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+3. Atasan/Kepala Seksi hanya bisa melakukan penyetujuan ekspedisi kendaraan
 
-### Premium Partners
+4. Pada menu sidebar "Rangkuman Bulanan", anda dapat melihat seluruh data model grafik yang telah dibuat; antara lain banyaknya kendaraan yang diservis, penggunaan BBM, dan juga jumlah ekspedisi per-Tahun maupun per-Bulan, kemudian juga terdapat 2 tabel yang menunjukan kendaraan dan juga driver yang tersedia/tidak sedang dalam ekspedisi
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+5. Pada menu sidebar "Data Master", terdapat submenu sebagai berikut:
+    a. List Kendaraan => Seluruh jumlah Kendaraan
+    b. List Driver => Seluruh jumlah Driver
+    c. Kendaraan Tersedia => Kendaraan yang statusnya tersedia/tidak sedang dalam ekspedisi ataupun servis
+    d. Kendaraan Diservice => Kendaraan yang sedang dalam perawatan/servis
+    e. Kendaraan Pending => kendaraan yang sedang dalam tahap pemesanan dan menunggu persetujuan penanggung jawab
 
-## Contributing
+6. Untuk menambahkan Kendaraan :
+    1) Login Sebagai Admin
+    2) Pergi ke menu Data Master > List Kendaraan > +Tambah Kendaraan > Inputkan Data pada kolom yang disediakan
+    3) Tekan Submit
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+7. Untuk menambahkan driver :
+    1) Login Sebagai Admin
+    2) pergi ke Menu Data Master > List Driver > +Tambah Driver > Inputkan Data pada kolom yang disediakan
+    3) Tekan Submit
 
-## Code of Conduct
+8. Untuk mengirim Kendaraan ke bagian servis/perawatan :
+    1) Login Sebagai Admin
+    2) Pergi ke Menu List Kendaraan
+    3) Pada bagian kolom Action, pilih Servis
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+9. Untuk mengembalikan kendaraan dari bagian servis/perawatan :
+    1) Login Sebagai Admin
+    2) Pergi ke Menu Kendaraan Diservice
+    3) Pilih Kendaraan yang ingin dikembalikan dari bagian service
+    4) tekan Selesai yang memiliki Tombol Warna Biru di bagian Row Action
 
-## Security Vulnerabilities
+10. Untuk Menghapus Kendaraan :
+    1) Login Sebagai Admin
+    2) Pegi ke Menu List Kendaraan
+    3) Pilih Hapus pada bagian Row Action
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+11. Untuk merubah status Driver menjadi Cuti :
+    1) Login Sebagai Admin
+    2) Pergi ke Menu List Driver
+    3) Tekan Cuti pada bagian Action
+    4) Jika cuti Driver telah selesai, tekan kembali Selesai Cuti
 
-## License
+12. Cara mengirim kendaraan ke Ekspedisi :
+    1) Login Sebagai Admin
+    2) Pergi ke menu Pesan Kendaraan
+    3) tekan +Tambah Kendaraan
+    4) Isikan Data pada Form yang telah disiapkan
+    5) tekan submit
+    6) Kendaraan akan dipindahkan ke bagian Pending, menunggu persetujuan Kepala Seksi yang telah ditunjuj/sebagai penanggung jawab ekspedisi
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+13. Cara Eksport File Excel Riwayat Ekspedisi :
+    1) Login sebagai Siapa Saja
+    2) Pergi ke Menu Riwayat Kendaraan
+    3) Pada Bagian Kanan Atas terdapat tombol Hijau bertuliskan +Export, kemudian tekan
+
+14. Cara menyetujui ekspedisi yang telah dipesan :
+    1) Login sebagai Kepala Seksi/Atasan
+    2) Pergi ke Menu Data Master > Kendaraan Pending
+    3) Perhatikan Nama Penanggungjawab yang ada pada tabel
+    4) jika namanya sama/sesuai dengan akun yang sedang login, maka dapat melakukan penyetujuan/penolakan
